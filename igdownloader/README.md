@@ -1,9 +1,6 @@
 # igdownloader
-
-Unsafe spaghetti golf-coded Selenium scraper that downloads all images and videos from an Instagram profile, [demo here](https://x.com/azuk4r/status/1944466277986398370) (tested on ubuntu22)
-
+Unsafe spaghetti golf-coded Selenium scraper that downloads all posts (images and videos) from an Instagram profile, [demo here](https://x.com/azuk4r/status/1944466277986398370) (tested on ubuntu22)
 ### Arguments
-
 | Argument | Description |
 |----------|-------------|
 | `--profile_url PROFILE_URL` | Instagram profile URL (required) |
@@ -12,9 +9,7 @@ Unsafe spaghetti golf-coded Selenium scraper that downloads all images and video
 | `--output OUTPUT` | Custom path directory for results |
 | `--debug` | Enable debug mode |
 | `-h, --help` | Show help message and exit |
-
-## Notes
-
+### Notes
 - Make sure **FFmpeg** is installed
 - The proxy argument configures the browser proxy extension and requests. If you want to configure proxy for FFmpeg also (recommended), you have to configure your environment variables. In Linux it would be done this way:
   ```bash
@@ -24,11 +19,10 @@ Unsafe spaghetti golf-coded Selenium scraper that downloads all images and video
   ```
 - The stealth covers almost all leaks, but if you are going to use this with multiple accounts worry about the WebGL image hash btw
 - Some descriptions cannot be obtained if the window is not maximized
-
-## Credits
-
+### Credits
 This tool relies on [FFmpeg](https://github.com/FFmpeg/FFmpeg) (via [ffmpeg-python](https://github.com/kkroening/ffmpeg-python)), [selenium](https://github.com/SeleniumHQ/selenium), [webdriver-manager](https://github.com/SergeyPirogov/webdriver_manager) and [requests](https://github.com/psf/requests) — thanks to all their developers!
-
-## Disclaimer
-
+### Disclaimer
 This is a tool for educational / personal use only — the author is not responsible for any misuse
+### PoW
+###### 5625 NASA instagram pics collage
+![nasa_collage](nasa_collage.jpeg)
