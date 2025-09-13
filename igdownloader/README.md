@@ -1,5 +1,5 @@
 # igdownloader
-Unsafe spaghetti golf-coded Selenium scraper that downloads all posts (images and videos) from an Instagram profile, [demo here](https://x.com/azuk4r/status/1944466277986398370) (tested on ubuntu22)
+Selenium-based scraper that downloads all posts (images and videos) from an Instagram profile, [demo here](https://x.com/azuk4r/status/1944466277986398370)
 ### Arguments
 | Argument | Description |
 |----------|-------------|
