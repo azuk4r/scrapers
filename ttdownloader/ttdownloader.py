@@ -94,7 +94,7 @@ def save_json(result_data,username,download_dir):
 	json_filename=join(download_dir,f'{username}_posts.json')
 	with open(json_filename,'w',encoding='utf-8') as f:dump(result_data,f,ensure_ascii=False,indent=4)
 
-def process_posts(posts,session,download_dir):
+def process_posts(posts,session,download_dir,result_data):
 	log('downloading media...')
 	author=posts[0].get('author',{})
 	unique_id=author.get('uniqueId','unknown_user')
@@ -156,37 +156,40 @@ def process_posts(posts,session,download_dir):
 					'stats':stats}
 				save_json(result_data,unique_id,download_dir)
 
-parser=ArgumentParser(description='tiktok profile media downloader')
-parser.add_argument('profile_url',help='tiktok profile url')
-parser.add_argument('--download_path',default='downloads',help='custom directory to save media')
-parser.add_argument('--proxy',default=None,help='optional proxy url')
-args=parser.parse_args()
-profile_url=args.profile_url.strip('/')
-download_dir=args.download_path
-proxy=args.proxy
-session=init_session(proxy)
-log(f'current ip: {session.get("https://api.ipify.org").text}')
-secuid=get_secuid_and_print_cookies(profile_url,session)
-log_once={'no_posts':False,'posts_retrieved':False,'retrieving_posts':False}
-all_posts=None
-while not all_posts:all_posts=fetch_posts(secuid,session,log_once)
-result_data={}
-author=all_posts[0].get('author',{})
-unique_id=author.get('uniqueId','unknown_user')
-json_filename=join(download_dir,f'{unique_id}_posts.json')
-try:
-	with open(json_filename,'r',encoding='utf-8') as f:result_data=load(f)
-except (FileNotFoundError,JSONDecodeError):
-	result_data[unique_id]={
-		'uniqueId':unique_id,
-		'nickname':author.get('nickname'),
-		'avatar':author.get('avatarLarger'),
-		'privateAccount':author.get('privateAccount'),
-		'verified':author.get('verified'),
-		'secUid':author.get('secUid'),
-		'signature':author.get('signature'),
-		'posts':{}}
-process_posts(all_posts,session,download_dir)
-log('process finished.')
+def main():
+	parser=ArgumentParser(description='tiktok profile media downloader')
+	parser.add_argument('profile_url',help='tiktok profile url')
+	parser.add_argument('--download_path',default='downloads',help='custom directory to save media')
+	parser.add_argument('--proxy',default=None,help='optional proxy url')
+	args=parser.parse_args()
+	profile_url=args.profile_url.strip('/')
+	download_dir=args.download_path
+	proxy=args.proxy
+	session=init_session(proxy)
+	log(f'current ip: {session.get("https://api.ipify.org").text}')
+	secuid=get_secuid_and_print_cookies(profile_url,session)
+	log_once={'no_posts':False,'posts_retrieved':False,'retrieving_posts':False}
+	all_posts=None
+	while not all_posts:all_posts=fetch_posts(secuid,session,log_once)
+	result_data={}
+	author=all_posts[0].get('author',{})
+	unique_id=author.get('uniqueId','unknown_user')
+	json_filename=join(download_dir,f'{unique_id}_posts.json')
+	try:
+		with open(json_filename,'r',encoding='utf-8') as f:result_data=load(f)
+	except (FileNotFoundError,JSONDecodeError):
+		result_data[unique_id]={
+			'uniqueId':unique_id,
+			'nickname':author.get('nickname'),
+			'avatar':author.get('avatarLarger'),
+			'privateAccount':author.get('privateAccount'),
+			'verified':author.get('verified'),
+			'secUid':author.get('secUid'),
+			'signature':author.get('signature'),
+			'posts':{}}
+	process_posts(all_posts,session,download_dir,result_data)
+	log('process finished.')
+
+if __name__ == '__main__':main()
 	# by azuk4r
 	# ¬_¬
