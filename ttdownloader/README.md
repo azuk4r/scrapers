@@ -1,12 +1,12 @@
 # ttdownloader
-Requests-based scraper to download all posts (images and videos) from a TikTok profile, [demo here](https://x.com/azuk4r/status/1963535850714575259)
+Requests-based scraper to download all posts (images and videos with no watermark) from a TikTok profile, [demo here](https://x.com/azuk4r/status/1963535850714575259)
 ### Arguments
 | Argument | Description |
 |----------|-------------|
-| `profile_url` | tiktok profile url (required) |
-| `--download_path DOWNLOAD_PATH` | custom directory to save media |
-| `--proxy PROXY` | optional proxy url |
-| `-h, --help` | show help message and exit |
+| `profile_url` | TikTok profile URL (required) |
+| `--download_path DOWNLOAD_PATH` | Custom directory to save media |
+| `--proxy PROXY` | Optional proxy URL |
+| `-h, --help` | Show help message and exit |
 ### Notes
 - Easy to use, simply install the requirements.txt with `pip install -r requirements.txt`, preferably inside a virtual environment (you can create it with `python3 -m venv venv` and activate it with `source venv/bin/activate`)
 - Supports http/s and socks5 proxies (in case you want to use it with Tor btw)
