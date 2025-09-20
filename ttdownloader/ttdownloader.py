@@ -101,7 +101,7 @@ def process_posts(posts,session,download_dir,result_data):
 	makedirs(join(download_dir,unique_id),exist_ok=True)
 	existing_urls=set()
 	for post_data in result_data[unique_id]['posts'].values():
-			urls=post_data['url']
+			urls=post_data['url'].split('?')[0]
 			if not isinstance(urls,list):urls=[urls]
 			existing_urls.update(urls)
 	for index,post in enumerate(tqdm(posts,unit='post',ncols=80),1):
@@ -121,7 +121,7 @@ def process_posts(posts,session,download_dir,result_data):
 				if not urls:continue
 				img_url=urls[0]
 				if not img_url.startswith('https://p16'):continue
-				if img_url in existing_urls:continue
+				if img_url.split('?')[0] in existing_urls:continue
 				ext=img_url.split('?')[0].split('.')[-1]
 				filename=f'{safe_post_id}_{time_component}_{i}.{ext}'
 				filepath=join(download_dir,unique_id,filename)
@@ -142,7 +142,7 @@ def process_posts(posts,session,download_dir,result_data):
 		video=post.get('video',{})
 		video_url=video.get('playAddr') or ''
 		if video_url.startswith('https://v16'):
-			if video_url in existing_urls:continue
+			if video_url.split('?')[0] in existing_urls:continue
 			filename=f'{safe_post_id}_{time_component}.mp4'
 			filepath=join(download_dir,unique_id,filename)
 			full_path=abspath(filepath)
