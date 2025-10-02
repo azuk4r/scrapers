@@ -1,6 +1,7 @@
 # scrapers
 scrapers collection I made
 * [igdownloader](https://github.com/azuk4r/scrapers/tree/main/igdownloader): Selenium-based scraper that downloads all posts (images and videos) from an Instagram profile
+* [pindownloader](https://github.com/azuk4r/scrapers/tree/main/pindownloader): Selenium-based scraper to download Pinterest pins (images and videos) by keywords
 * [ttdownloader](https://github.com/azuk4r/scrapers/tree/main/ttdownloader): Requests-based scraper to download all posts (images and videos with no watermark) from a TikTok profile
 ### Disclaimer
 These tools are for educational / personal use only — the author is not responsible for any misuse
