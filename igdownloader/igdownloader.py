@@ -535,10 +535,17 @@ def main():
 		try:
 			parsed=urlparse(a.proxy)
 			if parsed.hostname and parsed.port:
-				if parsed.username and parsed.password:proxy_url=f'http://{parsed.username}:{parsed.password}@{parsed.hostname}:{parsed.port}'
-				else:proxy_url=f'http://{parsed.hostname}:{parsed.port}'
-				PROXIES={'http':proxy_url,'https':proxy_url}
-				PROXY_ARGS=['-http_proxy',proxy_url]
+				if parsed.scheme=='socks5':
+					proxy_url=f'socks5://{parsed.hostname}:{parsed.port}'
+					PROXIES={'http':proxy_url,'https':proxy_url}
+					PROXY_ARGS=['-http_proxy',proxy_url]
+					dbg(f'{DARK}[debug] socks5 proxy configured for requests{RESET}')
+				else:
+					if parsed.username and parsed.password:proxy_url=f'http://{parsed.username}:{parsed.password}@{parsed.hostname}:{parsed.port}'
+					else:proxy_url=f'http://{parsed.hostname}:{parsed.port}'
+					PROXIES={'http':proxy_url,'https':proxy_url}
+					PROXY_ARGS=['-http_proxy',proxy_url]
+					dbg(f'{DARK}[debug] http proxy configured for requests{RESET}')
 		except Exception as e:print(f'{RED}[error] proxy config: {e}{RESET}')
 	user=uname(a.profile_url)
 	base=abspath(a.output)if a.output else abspath(join('results',user))
